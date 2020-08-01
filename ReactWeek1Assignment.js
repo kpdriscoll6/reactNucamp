@@ -18,7 +18,7 @@ class Bootcamp{
         }
         else{
             this.students = this.students.concat(studentToRegister) 
-            console.log(`Registering ${studentToRegister.email} to the bootcamp Web Dev Fundamentals.`)
+            console.log(`Registering ${studentToRegister.email} to the bootcamp ${this.name}`)
         }
         return this.students
     }
