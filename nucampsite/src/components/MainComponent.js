@@ -21,16 +21,6 @@ const mapStateToProps = state => {
 
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            campsites: CAMPSITES,
-            comments: COMMENTS,
-            partners: PARTNERS,
-            promotions: PROMOTIONS
-        };
-    }
-
     render() {
 
         const HomePage = () => {
