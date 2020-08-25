@@ -65,8 +65,6 @@ function RenderComments({ comments, postComment, campsiteId }) {
                         })
                     }
                 </Stagger>
-          );
-        })}
         <CommentForm campsiteId={campsiteId} postComment={postComment} />
       </div>
     );

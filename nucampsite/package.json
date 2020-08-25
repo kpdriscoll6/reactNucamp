@@ -21,7 +21,10 @@
     "redux-logger": "3.0.6",
     "redux-thunk": "2.2.0",
     "typeface-lobster": "^0.0.72",
-    "typeface-open-sans": "^0.0.75"
+    "typeface-open-sans": "^0.0.75",
+    "prop-types": "15.6.0",
+    "react-animation-components": "3.0.0",
+    "react-transition-group": "2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
