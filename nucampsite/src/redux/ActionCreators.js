@@ -3,7 +3,6 @@ import { baseUrl } from "../shared/baseUrl";
 
 export const fetchCampsites = () => (dispatch) => {
   dispatch(campsitesLoading());
-
   return fetch(baseUrl + "campsites")
     .then(
       (response) => {
@@ -135,6 +134,32 @@ export const fetchPromotions = () => (dispatch) => {
     .catch((error) => dispatch(promotionsFailed(error.message)));
 };
 
+export const fetchPartners = () => (dispatch) => {
+  dispatch(partnersLoading());
+
+  return fetch(baseUrl + "partners")
+    .then(
+      (response) => {
+        if (response.ok) {
+          return response;
+        } else {
+          const error = new Error(
+            `Error ${response.status}: ${response.statusText}`
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      (error) => {
+        const errMess = new Error(error.message);
+        throw errMess;
+      }
+    )
+    .then((response) => response.json())
+    .then((partners) => dispatch(addPartners(partners)))
+    .catch((error) => dispatch(partnersFailed(error.message)));
+};
+
 export const promotionsLoading = () => ({
   type: ActionTypes.PROMOTIONS_LOADING,
 });
@@ -157,3 +182,49 @@ export const addCampsites = (campsites) => ({
   type: ActionTypes.ADD_CAMPSITES,
   payload: campsites,
 });
+
+export const partnersLoading = () => ({
+  type: ActionTypes.PARTNERS_LOADING,
+});
+
+export const partnersFailed = (errMess) => ({
+  type: ActionTypes.PARTNERS_FAILED,
+  payload: errMess,
+});
+
+export const addPartners = (partners) => ({
+  type: ActionTypes.ADD_PARTNERS,
+  payload: partners,
+});
+
+export const postFeedback = (feedback) => () => {
+  return fetch(baseUrl + "feedback", {
+    method: "POST",
+    body: JSON.stringify(feedback),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+  .then(
+    (response) => {
+      if (response.ok) {
+        return response;
+      } else {
+        const error = new Error(
+          `Error ${response.status}: ${response.statusText}`
+        );
+        error.response = response;
+        throw error;
+      }
+    },
+    (error) => {
+      throw error;
+    }
+  )
+  .then((response) => response.json())
+  .then((response) => alert("Thank you for your feedback: " + JSON.stringify(response)))
+  .catch((error) => {
+    console.log("post comment", error.message);
+    alert("Error: " + error.message);
+  });
+};

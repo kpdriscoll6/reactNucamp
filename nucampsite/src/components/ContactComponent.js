@@ -36,12 +36,12 @@ class Contact extends Component {
         email: false,
       },
     };
+    this.handleSubmit=this.handleSubmit.bind(this)
   }
   handleSubmit(values) {
     console.log("Current state is: " + JSON.stringify(values));
-    alert("Current state is: " + JSON.stringify(values));
+    this.props.postFeedback(values)
     this.props.resetFeedbackForm();
-    console.log("form should be reset");
   }
 
   render() {
